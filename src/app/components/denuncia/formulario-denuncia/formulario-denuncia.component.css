@@ -1,0 +1,32 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f7fc;
+    padding: 20px;
+  }
+
+  .new-form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .form {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .submit-button {
+    width: 100%;
+    margin-top: 16px;
+
+  }
+
+  .submit-button:disabled {
+    background-color: #b0bec5;
+  }

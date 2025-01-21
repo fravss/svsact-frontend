@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
-import { ListaDenunciaComponent } from './components/lista-denuncia/lista-denuncia.component';
+import { ListaDenunciaComponent } from './components/denuncia/lista-denuncia/lista-denuncia.component';
+import { FormularioDenunciaComponent } from './components/denuncia/formulario-denuncia/formulario-denuncia.component';
 
 
 export const routes: Routes = [
-    { path: '1', component: ListaDenunciaComponent }
+    { path: 'denuncias', component: ListaDenunciaComponent },
+    { path: 'criar-denuncia', component: FormularioDenunciaComponent }
 ];

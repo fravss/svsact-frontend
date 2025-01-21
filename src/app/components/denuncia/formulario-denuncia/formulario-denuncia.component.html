@@ -1,0 +1,36 @@
+<div class="form-container">
+
+  <form [formGroup]="denunciaForm" (ngSubmit)="onSubmit()" class="new-form">
+    <mat-form-field  appearance="outline" class="example-full-width" class="form">
+      <mat-label for="relato">Relato</mat-label>
+      <input matInput id="relato" formControlName="relato" type="text" />
+    </mat-form-field>
+    <div></div>
+  
+    <mat-form-field  appearance="outline" class="example-full-width"  class="form">
+      <mat-label for="pessoaId">Pessoa</mat-label>
+      <input matInput id="pessoaId" formControlName="pessoaId" type="number" />
+    </mat-form-field>
+    <div></div>
+    <mat-form-field appearance="outline" class="example-full-width"  class="form" >
+      <mat-label>Origem Denuncia</mat-label>
+      <mat-select formControlName="origem">
+        @for (origemDenuncia of origemDenuncias; track origemDenuncia) {
+          <mat-option [value]="origemDenuncia" >{{origemDenuncia}} </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width"  class="form" >
+      <mat-label>Direito Violado</mat-label>
+      <mat-select formControlName="direitosViolados" multiple (selectionChange)="onDireitoChange($event)">
+        @for (direitoViolado of direitosVioladosEnum; track direitoViolado) {
+          <mat-option [value]="direitoViolado" >{{direitoViolado}} </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  
+    <button mat-stroked-button type="submit" [disabled]="denunciaForm.invalid" class="submit-button">Criar Denúncia</button>
+  </form>
+  
+</div>
