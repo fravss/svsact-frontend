@@ -29,6 +29,11 @@ export class DenunciaService {
   getDireitosViolados(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/direito-violado`);
   }
+  getAgenteViolador(): Observable<string[]> {
+    console.log('aqui');
+    return this.http.get<string[]>(`${this.baseUrl}/agente-violador`);
+  }
+  
   
 
 }

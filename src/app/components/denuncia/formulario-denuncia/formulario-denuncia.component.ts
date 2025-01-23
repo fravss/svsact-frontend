@@ -11,39 +11,51 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-
+import {ChangeDetectionStrategy} from '@angular/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import { StatusRD } from '../../../interfaces/enums/StatusRD';
 
 @Component({
   selector: 'app-formulario-denuncia',
   imports: [ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatButton, MatInputModule, MatSelectModule,
-    MatOptionModule, CommonModule, MatDialogModule],
+    MatOptionModule, CommonModule, MatDialogModule, MatDatepickerModule],
   templateUrl: './formulario-denuncia.component.html',
-  styleUrl: './formulario-denuncia.component.css'
+  styleUrl: './formulario-denuncia.component.css',
+  providers: [provideNativeDateAdapter()],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormularioDenunciaComponent implements OnInit{
   denunciaForm: FormGroup;
-  origemDenuncias: string[] = [];
-
+  origemDenunciasEnum: string[] = [];
+  statusRD: string[] = Object.values(StatusRD);
   direitosVioladosEnum: string[] = [];
+  agenteVioladorEnum: string[] = [];
 
   readonly dialog = inject(MatDialog);
 
   constructor(private fb: FormBuilder, private denunciaService: DenunciaService, private router: Router) {
     this.denunciaForm = this.fb.group({
       relato: ['', Validators.required],
-      pessoaId: [null, Validators.required],
-      origem: ['', Validators.required],
+      dataEmissao:  ['', Validators.required],
+      statusRD: ['', Validators.required],
+      agenteViolador:['', Validators.required],
+      origemDenuncia: ['', Validators.required],
       direitosViolados: ['', Validators.required]
 
     });
   }
   ngOnInit(): void {
     this.denunciaService.getOrigemDenuncias().subscribe(data => {
-      this.origemDenuncias = data;
+      this.origemDenunciasEnum = data;
     });
 
     this.denunciaService.getDireitosViolados().subscribe(data => {
       this.direitosVioladosEnum = data;
+    });
+
+    this.denunciaService.getAgenteViolador().subscribe(data => {
+      this.agenteVioladorEnum = data;
     });
   }
 

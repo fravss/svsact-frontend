@@ -8,15 +8,36 @@
     <div></div>
   
     <mat-form-field  appearance="outline" class="example-full-width"  class="form">
-      <mat-label for="pessoaId">Pessoa</mat-label>
-      <input matInput id="pessoaId" formControlName="pessoaId" type="number" />
+      <mat-label for="dataEmissao">Data de Emissão</mat-label>
+      <input matInput id="dataEmissao" formControlName="dataEmissao"  matInput [matDatepicker]="picker" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <div></div>
     <mat-form-field appearance="outline" class="example-full-width"  class="form" >
       <mat-label>Origem Denuncia</mat-label>
-      <mat-select formControlName="origem">
-        @for (origemDenuncia of origemDenuncias; track origemDenuncia) {
+      <mat-select formControlName="origemDenuncia">
+        @for (origemDenuncia of origemDenunciasEnum; track origemDenuncia) {
           <mat-option [value]="origemDenuncia" >{{origemDenuncia}} </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="example-full-width"  class="form" >
+      <mat-label>Agente Violador</mat-label>
+      <mat-select formControlName="agenteViolador">
+        @for (agenteViolador of agenteVioladorEnum; track agenteViolador) {
+          <mat-option [value]="agenteViolador" >{{agenteViolador}} </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width"  class="form" >
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="statusRD">
+        @for (status of statusRD; track status) {
+          <mat-option [value]="status" >{{status}} </mat-option>
         }
       </mat-select>
     </mat-form-field>
