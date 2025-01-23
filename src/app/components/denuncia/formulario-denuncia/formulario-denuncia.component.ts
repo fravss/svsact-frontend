@@ -15,11 +15,12 @@ import {ChangeDetectionStrategy} from '@angular/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { StatusRD } from '../../../interfaces/enums/StatusRD';
+import { LogoutButtonComponent } from '../../autenticacao/logout-button/logout-button.component';
 
 @Component({
   selector: 'app-formulario-denuncia',
   imports: [ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatButton, MatInputModule, MatSelectModule,
-    MatOptionModule, CommonModule, MatDialogModule, MatDatepickerModule],
+    MatOptionModule, CommonModule, MatDialogModule, MatDatepickerModule, LogoutButtonComponent],
   templateUrl: './formulario-denuncia.component.html',
   styleUrl: './formulario-denuncia.component.css',
   providers: [provideNativeDateAdapter()],

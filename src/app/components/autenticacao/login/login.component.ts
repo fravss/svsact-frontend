@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AutenticacaoService } from '../../services/autenticacao.service';
+import { AutenticacaoService } from '../../../services/autenticacao.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UsuarioLogin } from '../../interfaces/usuario';
+import { UsuarioLogin } from '../../../interfaces/usuario';
 import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButton, MatButtonModule } from '@angular/material/button';
@@ -29,10 +29,11 @@ export class LoginComponent {
       if (this.loginForm.valid) {
         const usuario: UsuarioLogin = this.loginForm.value;
         this.autenticacaoService.login(usuario).subscribe(response => {
-          console.log('Logado:', response);
-          
+          this.autenticacaoService.saveToken(response.token) 
+          this.router.navigate(['/denuncias']);      
         });
-        this.router.navigate(['']);
+        this.router.navigate(['/denuncias']);
+       
       }
     }
 

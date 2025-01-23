@@ -9,12 +9,13 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { LogoutButtonComponent } from '../../autenticacao/logout-button/logout-button.component';
 
 
 
 @Component({
   selector: 'lista-denuncia',
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatIconModule, MatButtonModule, MatButton, MatPaginatorModule],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatIconModule, MatButtonModule, MatButton, MatPaginatorModule, LogoutButtonComponent],
   templateUrl: './lista-denuncia.component.html',
   styleUrls: ['./lista-denuncia.component.css'],
 })
