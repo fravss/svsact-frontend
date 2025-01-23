@@ -1,22 +1,25 @@
-<mat-form-field appearance="outline">
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+<div class="tabela-container">
+<mat-form-field appearance="outline" class="mat-form-field-small">
+  <mat-label>Buscar</mat-label>
+  <input matInput (keyup)="applyFilter($event)" #input>
 </mat-form-field>
 <app-logout-button></app-logout-button>
+
 <button mat-stroked-button (click)="navigateToNovaDenuncia()" class="navigate-button">Nova Denúncia</button>
 
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+<table mat-table [dataSource]="dataSource" class="tabela" matSort>
     <ng-container matColumnDef="Relato">
-        <th mat-header-cell *matHeaderCellDef style="text-align: center;"> relato </th>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header"> Relato </th>
         <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.relato}} </td>
     </ng-container>
     <ng-container matColumnDef="Status">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Status </th>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header"> Status </th>
       <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.statusRD}} </td>
   </ng-container>
   <ng-container matColumnDef="Data">
-    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Data </th>
+    <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header"> Data </th>
     <td mat-cell *matCellDef="let element" style="text-align: center;"> 
       {{ element.dataEmissao | date: 'dd/MM/yyyy' }}
     </td>
@@ -26,7 +29,7 @@
 
     
     <ng-container matColumnDef="Acoes">
-        <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Ações </th>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header"> Ações </th>
         <td mat-cell *matCellDef="let element" style="text-align: center;">
           <button mat-stroked-button (click)="deleteDenuncia(element.id)">
             Deletar
@@ -43,9 +46,11 @@
     
 </table>
 <mat-paginator
-  [pageSizeOptions]="[2, 10, 20]"
-  [pageSize]="2"
+  [pageSizeOptions]="[5, 10, 20]"
+  [pageSize]="5"
   showFirstLastButtons
-  aria-label="Select page of periodic elements">
+  aria-label="Select page of periodic elements"
+  class="paginator">
 </mat-paginator>
+</div>
 

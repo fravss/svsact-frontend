@@ -1,0 +1,26 @@
+.tabela-container {
+ 
+  background-color: #f4f7fc;
+  
+
+  }
+
+.tabela {
+  background-color:rgb(255, 255, 255);
+
+  
+  
+}
+
+
+.paginator {
+  background-color:rgb(255, 255, 255)
+}
+.header {
+  color: #00468c;
+  background-color:#005dbb5a
+}
+
+.navigate-button {
+  position: absolute; top: 20px; right: 100px;
+}
