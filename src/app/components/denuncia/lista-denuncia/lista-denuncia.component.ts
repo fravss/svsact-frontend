@@ -25,12 +25,13 @@ export class ListaDenunciaComponent implements OnInit, AfterViewInit {
 
   constructor(private denunciaService: DenunciaService, private router: Router) { }
   
-  displayedColumns: string[] = ['Relato', 'Status','Data', 'Acoes'];
+  displayedColumns: string[] = ['Relato', 'Criador', 'Status','Data', 'Acoes'];
   dataSource = new MatTableDataSource<Denuncia>(([]));
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
      this.getDenuncia();
+     
 
   }
 
@@ -39,22 +40,23 @@ export class ListaDenunciaComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getDenuncia(): void {
-    this.denunciaService.getDenuncia().subscribe({
+  async getDenuncia(): Promise<void> {
+    (await this.denunciaService.getDenuncia()).subscribe({
       next: (data: Denuncia[]) => {
         this.denunciaData = data.map(denuncia => ({
           ...denuncia,
           dataEmissao: new Date(denuncia.dataEmissao),
         }));
         this.dataSource.data = this.denunciaData;
+        this.dataSource.paginator = this.paginator;
       },
       error: err => console.error('Error fetching data:', err),
     });
   }
 
 
-  deleteDenuncia(id: number): void {
-    this.denunciaService.deleteDenuncia(id).subscribe({
+   deleteDenuncia(id: number): void {
+     this.denunciaService.deleteDenuncia(id).subscribe({
       next: () => {
         this.dataSource.data = this.dataSource.data.filter(denuncia => denuncia.id !== id);
         

@@ -63,14 +63,15 @@ export class FormularioDenunciaComponent implements OnInit{
   onDireitoChange(event: any): void {
     console.log('Origem da denúncia selecionada:', event.value);
   }
-  onSubmit(): void {
+ onSubmit(): void {
     if (this.denunciaForm.valid) {
       const novaDenuncia: CriarDenuncia = this.denunciaForm.value;
-      this.denunciaService.addDenuncia(novaDenuncia).subscribe(response => {
+       this.denunciaService.addDenuncia(novaDenuncia).subscribe(response => {
         console.log('Denúncia criada com sucesso:', response);
+        this.router.navigate(['/denuncias']);
         
       });
-      this.router.navigate(['/denuncias']);
+      
     }
   }
 

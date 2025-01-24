@@ -1,4 +1,5 @@
 import { StatusRD } from "./enums/StatusRD";
+import { Usuario } from "./usuario";
 
   export interface CriarDenuncia {
     relato: string;
@@ -10,4 +11,5 @@ import { StatusRD } from "./enums/StatusRD";
   }
   export interface Denuncia extends CriarDenuncia {
     id: number;
+    conselheiro: Usuario;
  }

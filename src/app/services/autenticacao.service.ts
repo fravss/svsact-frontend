@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { UsuarioLogin } from '../interfaces/usuario';
+import { Usuario } from '../interfaces/usuario';
 import { Observable } from 'rxjs/internal/Observable';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,11 @@ export class AutenticacaoService {
 
   private baseUrl =  environment.apiUrl + '/auth/login';
  
-   constructor(private http: HttpClient) { }
+   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
 
-   login(usuario: UsuarioLogin) : Observable<any>{
-     console.log(usuario)
-     return this.http.post<UsuarioLogin>(`${this.baseUrl}`, usuario);
+   login(usuario: Usuario) : Observable<any>{
+     console.log('aqui',usuario)
+     return this.http.post<Usuario>(`${this.baseUrl}`, usuario);
    }
 
    saveToken(token: string): void {
@@ -25,7 +26,10 @@ export class AutenticacaoService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('jwtToken');
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('jwtToken');
+    }
+    return null;
   }
 
   logout(): void {

@@ -14,6 +14,10 @@
         <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header"> Relato </th>
         <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.relato}} </td>
     </ng-container>
+    <ng-container matColumnDef="Criador">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header"> Criado por </th>
+      <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.conselheiro.nome}} </td>
+    </ng-container>
     <ng-container matColumnDef="Status">
       <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header"> Status </th>
       <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.statusRD}} </td>
