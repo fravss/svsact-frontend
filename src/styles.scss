@@ -1,7 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/*tabela*/
+:root {
+  @include mat.table-overrides((
+    background-color: rgb(255, 255, 255),
+    header-headline-color: #005cbb,
+    row-item-label-text-color: grey,
+    row-item-outline-color: grey 
+      ));
+   
+}
+
+
+:root {
+  @include mat.paginator-overrides((
+    container-background-color: rgb(255, 255, 255),
+  ));
+}
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
 
 
 /*formulários*/
@@ -10,14 +32,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f7fc;
+
     padding: 20px;
     
     
   }
 
   .new-form {
-    background-color: white;
+
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -35,6 +57,3 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   }
 
-  .submit-button:disabled {
-    background-color: #b0bec5;
-  }

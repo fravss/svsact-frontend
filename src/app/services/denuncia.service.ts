@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { CriarDenuncia } from '../interfaces/denuncia';
+import { Denuncia } from '../interfaces/denuncia';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,9 @@ export class DenunciaService {
   deleteDenuncia(id: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
-  addDenuncia(denuncia: CriarDenuncia) : Observable<CriarDenuncia>{
+  addDenuncia(denuncia: Denuncia) : Observable<Denuncia>{
     console.log(denuncia)
-    return this.http.post<CriarDenuncia>(`${this.baseUrl}`, denuncia);
+    return this.http.post<Denuncia>(`${this.baseUrl}`, denuncia);
   }
   getOrigemDenuncias(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/origem-denuncia`);

@@ -17,7 +17,7 @@ import { LogoutButtonComponent } from '../../autenticacao/logout-button/logout-b
   selector: 'lista-denuncia',
   imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatIconModule, MatButtonModule, MatButton, MatPaginatorModule, LogoutButtonComponent],
   templateUrl: './lista-denuncia.component.html',
-  styleUrls: ['./lista-denuncia.component.css'],
+  styleUrls: ['./lista-denuncia.component.scss'],
 })
 export class ListaDenunciaComponent implements OnInit, AfterViewInit {
 

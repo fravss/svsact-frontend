@@ -1,17 +1,17 @@
 <div class="tabela-container">
-<mat-form-field appearance="outline" class="mat-form-field-small">
-  <mat-label>Buscar</mat-label>
-  <input matInput (keyup)="applyFilter($event)" #input>
+<mat-form-field  appearance="outline"style="margin-top: 20px;">
+  <mat-label >Buscar</mat-label>
+  <input  matInput    (keyup)="applyFilter($event)" #input>
 </mat-form-field>
 <app-logout-button></app-logout-button>
 
-<button mat-stroked-button (click)="navigateToNovaDenuncia()" class="navigate-button">Nova Denúncia</button>
+<button mat-stroked-button color="primary" (click)="navigateToNovaDenuncia()" class="navigate-button">Nova Denúncia</button>
 
 
 
-<table mat-table [dataSource]="dataSource" class="tabela" matSort>
+<table mat-table [dataSource]="dataSource" class="tabela" matSort  >
     <ng-container matColumnDef="Relato">
-        <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header"> Relato </th>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header" color="primary"> Relato </th>
         <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.relato}} </td>
     </ng-container>
     <ng-container matColumnDef="Criador">
@@ -33,9 +33,10 @@
 
     
     <ng-container matColumnDef="Acoes">
-        <th mat-header-cell *matHeaderCellDef style="text-align: center;" class="header"> Ações </th>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;" 
+        class="header"   > Ações </th>
         <td mat-cell *matCellDef="let element" style="text-align: center;">
-          <button mat-stroked-button (click)="deleteDenuncia(element.id)">
+          <button mat-stroked-button color="primary" (click)="deleteDenuncia(element.id)">
             Deletar
           </button>
         </td>
@@ -51,10 +52,9 @@
 </table>
 <mat-paginator
   [pageSizeOptions]="[5, 10, 20]"
-  [pageSize]="5"
-  showFirstLastButtons
-  aria-label="Select page of periodic elements"
-  class="paginator">
+  [pageSize]="10"
+  [hidePageSize]=false
+>
 </mat-paginator>
 </div>
 

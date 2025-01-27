@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DenunciaService } from '../../../services/denuncia.service';
-import { CriarDenuncia } from '../../../interfaces/denuncia';
+import { Denuncia } from '../../../interfaces/denuncia';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -65,7 +65,7 @@ export class FormularioDenunciaComponent implements OnInit{
   }
  onSubmit(): void {
     if (this.denunciaForm.valid) {
-      const novaDenuncia: CriarDenuncia = this.denunciaForm.value;
+      const novaDenuncia: Denuncia = this.denunciaForm.value;
        this.denunciaService.addDenuncia(novaDenuncia).subscribe(response => {
         console.log('Denúncia criada com sucesso:', response);
         this.router.navigate(['/denuncias']);

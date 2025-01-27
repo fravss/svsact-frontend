@@ -1,15 +1,14 @@
 import { StatusRD } from "./enums/StatusRD";
 import { Usuario } from "./usuario";
 
-  export interface CriarDenuncia {
+  export interface Denuncia {
     relato: string;
     dataEmissao: Date;
     statusRD: StatusRD;
     agenteViolador: string;
     origemDenuncia: string,
-    direitosViolados: string[]
-  }
-  export interface Denuncia extends CriarDenuncia {
+    direitosViolados: string[];
     id: number;
     conselheiro: Usuario;
- }
+  }
+ 
