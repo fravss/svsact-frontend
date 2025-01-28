@@ -66,9 +66,13 @@ export class ListaDenunciaComponent implements OnInit, AfterViewInit {
       }
     });
   }
+  alterarDenuncia(id: number): void {
+    this.router.navigate([`denuncia/${id}`]);
+ }
+ 
   
   navigateToNovaDenuncia() {
-    this.router.navigate(['criar-denuncia']);
+    this.router.navigate(['denuncia']);
   }
 
   applyFilter(event: Event): void {

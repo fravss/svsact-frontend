@@ -16,12 +16,18 @@ export class DenunciaService {
   getDenuncia(): Observable<any> {
     return this.http.get<any>(this.baseUrl);
   }
+  getDenunciaById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${id}`);
+  }
   deleteDenuncia(id: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
   addDenuncia(denuncia: Denuncia) : Observable<Denuncia>{
     console.log(denuncia)
     return this.http.post<Denuncia>(`${this.baseUrl}`, denuncia);
+  }
+  updateDenuncia(denuncia: Denuncia, id: number) : Observable<Denuncia>{
+    return this.http.put<Denuncia>(`${this.baseUrl}/${id}`, denuncia);
   }
   getOrigemDenuncias(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/origem-denuncia`);
