@@ -1,29 +1,30 @@
+<app-logout-button></app-logout-button>
 <div class="form-container">
-    <app-logout-button></app-logout-button>
-    <form [formGroup]="denunciaForm" (ngSubmit)="onSubmit()" class="new-form">
-        <mat-form-field  appearance="outline" class="example-full-width" class="form">
+ 
+    <form [formGroup]="denunciaForm" (ngSubmit)="onSubmit()">
+        <mat-form-field  appearance="outline" class="example-full-width">
             <mat-label for="responsaveis">Responsaveis</mat-label>
             <input matInput id="responsaveis" formControlName="responsaveis" type="text" />
           </mat-form-field>
           <div></div>
-          <mat-form-field  appearance="outline" class="example-full-width" class="form">
+          <mat-form-field  appearance="outline" class="example-full-width">
               <mat-label for="criancasAdolescentes">crianças ou adolescente envolvidos</mat-label>
               <input matInput id="criancasAdolescentes" formControlName="criancasAdolescentes" type="text" />
             </mat-form-field>
             <div></div>
-      <mat-form-field  appearance="outline" class="example-full-width" class="form">
+      <mat-form-field  appearance="outline" class="example-full-width">
         <mat-label for="relato">Relato</mat-label>
         <textarea matInput id="relato" formControlName="relato" type="text"></textarea>
       </mat-form-field>
       <div></div>
       
-          <mat-form-field  appearance="outline" class="example-full-width" class="form">
+          <mat-form-field  appearance="outline" class="example-full-width">
             <mat-label for="medidasAplicadas">Medidas Aplicadas</mat-label>
             <input matInput id="medidasAplicadas" formControlName="medidasAplicadas" type="text" />
           </mat-form-field>
           <div></div>
     
-      <mat-form-field  appearance="outline" class="example-full-width"  class="form">
+      <mat-form-field  appearance="outline" class="example-full-width">
         <mat-label for="dataEmissao">Data de Emissão</mat-label>
         <input matInput id="dataEmissao" formControlName="dataEmissao"  matInput [matDatepicker]="picker" />
         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -31,7 +32,7 @@
     <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <div></div>
-      <mat-form-field appearance="outline" class="example-full-width"  class="form" >
+      <mat-form-field appearance="outline">
         <mat-label>Origem Denuncia</mat-label>
         <mat-select formControlName="origemDenuncia">
           @for (origemDenuncia of origemDenunciasEnum; track origemDenuncia) {
@@ -50,7 +51,8 @@
           }
         </mat-select>
       </mat-form-field>
-      <button mat-stroked-button color="accent" type="submit" [disabled]="denunciaForm.invalid" class="submit-button">Salvar</button>
+      <!-- <button mat-raised-button  type="submit" [disabled]="denunciaForm.invalid" class="submit-button">Salvar</button> -->
+      <button mat-flat-button  type="submit"  class="submit-button">Salvar</button>
     </form>
     
   </div>

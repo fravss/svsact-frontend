@@ -1,0 +1,88 @@
+@use  '../../../../assets/styles/colors.scss' as cores;
+
+.table-container{
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 6px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.233);
+    width: 90%; 
+    max-width:1850px;
+    margin: 20px auto 0;
+
+    .table-header {
+      display: flex;
+      justify-content:flex-start;
+      align-items: center;
+      gap: 20px;
+
+      .table-name {
+        color:cores.$grey;
+        font-size: 30px;
+        font-weight:400;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      mat-form-field {
+        margin-top: 20px;
+        
+      }
+    }
+
+    table {
+      width: 100%;
+      border-radius: 12px; 
+      overflow: hidden;
+      th {
+          padding: 12px;
+          background-color: cores.$dark-color;    
+          text-align: center;        
+      }   
+      td {
+        text-align: center;
+      } 
+
+      .first-cell {
+        font-weight: bold;
+      }
+      .odd-row {
+        background-color: cores.$light-color;
+            
+      }
+      
+      .even-row {
+        background-color: white;
+
+     
+      }
+      .action-button-odd {
+        background-color: cores.$dark-color;
+        color: white;
+        border: none;
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.108);
+
+        &:hover {
+          background-color: lighten(cores.$dark-color, 10%); 
+        }
+      }
+      
+      .action-button-even {
+        background-color: cores.$light-color; 
+        color: cores.$dark-color;
+        border: none;
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.108);
+
+        &:hover {
+          background-color: darken(cores.$light-color, 10%);
+        }
+      }
+  }    
+     
+
+    button {
+        margin-right: 8px;
+    }
+
+   
+}

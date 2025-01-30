@@ -23,7 +23,7 @@ import { first } from 'rxjs';
   imports:  [ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatButton, MatInputModule, MatSelectModule,
     MatOptionModule, CommonModule, MatDatepickerModule, LogoutButtonComponent],
   templateUrl: './form-denuncia.component.html',
-  styleUrl: './form-denuncia.component.css',
+  styleUrl: './form-denuncia.component.scss',
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

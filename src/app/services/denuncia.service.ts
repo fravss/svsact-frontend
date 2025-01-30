@@ -14,6 +14,7 @@ export class DenunciaService {
   constructor(private http: HttpClient) { }
 
   getDenuncia(): Observable<any> {
+    console.log("no get den")
     return this.http.get<any>(this.baseUrl);
   }
   getDenunciaById(id: number): Observable<any> {
