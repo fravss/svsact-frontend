@@ -44,14 +44,11 @@ export class TableDenunciaComponent implements  OnInit{
   }
 
   ngOnInit(): void {
-    this.getDenuncia();
-    
-
+    this.getDenuncia();    
  }
 
-
- async getDenuncia(): Promise<void> {
-   (await this.denunciaService.getDenuncia()).subscribe({
+getDenuncia(): void {
+    this.denunciaService.getDenuncia().subscribe({
      next: (data: Denuncia[]) => {
        this.denunciaData = data.map(denuncia => ({
          ...denuncia,

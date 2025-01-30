@@ -1,0 +1,7 @@
+@use '../../../../assets/styles/colors.scss' as cores;
+.footer {
+  background-color: cores.$light-color; 
+  color: cores.$dark-color;
+  text-align: center;
+  padding: 1px 0;
+}
