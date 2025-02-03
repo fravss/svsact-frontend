@@ -37,7 +37,6 @@ export class FormComponent implements  OnChanges {
 
       return config;
     }, {});
-   
     this.form = this.fb.group(formGroupConfig);
   }
 

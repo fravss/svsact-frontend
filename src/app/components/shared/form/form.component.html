@@ -5,7 +5,7 @@
       <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>{{ field.label }}</mat-label>
 
-        <div *ngIf="field.type === 'text' ">
+        <div *ngIf="field.type === 'text' || field.type === 'password' ">
           <input matInput [formControlName]="field.name" [type]="field.type" />
         </div>
 

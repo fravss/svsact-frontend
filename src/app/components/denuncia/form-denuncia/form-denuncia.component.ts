@@ -66,6 +66,7 @@ export class FormDenunciaComponent implements OnInit {
 
   async onSubmit(formValue: any): Promise<void> {
     try {
+      console.log('o form value ', formValue)
       if (this.denunciaId) {
         await this.denunciaService.updateDenuncia(formValue, this.denunciaId);
       } else {

@@ -5,6 +5,7 @@ import { Usuario } from '../interfaces/usuario';
 import { Observable } from 'rxjs/internal/Observable';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { isPlatformBrowser } from '@angular/common';
+import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,9 @@ export class AutenticacaoService {
  
    constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
 
-   login(usuario: Usuario) : Observable<any>{
-     console.log('aqui',usuario)
-     return this.http.post<Usuario>(`${this.baseUrl}`, usuario);
+   async login(usuario: Usuario) : Promise<void>{
+     const response = await firstValueFrom(this.http.post<any>(`${this.baseUrl}`, usuario));
+     this.saveToken(response.token)
    }
 
    saveToken(token: string): void {
