@@ -1,3 +1,23 @@
 <mat-toolbar class="navbar">
-    <app-logout-button></app-logout-button>
+
+  <button mat-button [matMenuTriggerFor]="denunciaMenu">
+    <mat-icon>report</mat-icon>
+    <span>Denúncia</span>
+    <mat-menu #denunciaMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/denuncia'">
+        <mat-icon>add</mat-icon>
+        <span>Nova Denúncia</span>
+      </button>
+      <button mat-menu-item [routerLink]="'/denuncias'">
+        <mat-icon>density_small</mat-icon>
+        <span>Todas as Denúncias</span>
+      </button>
+    </mat-menu>
+  </button>
+  <span class="spacer"></span>
+
+  <button mat-button  (click)="logout()" class="logout-button">
+    <span>Logout</span>
+  </button>
+
 </mat-toolbar>

@@ -5,10 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StatusRD } from '../../../interfaces/enums/StatusRD';
 import { FormComponent } from '../../shared/form/form.component';
 import { DatePipe } from '@angular/common';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-form-denuncia',
-  imports: [FormComponent],
+  imports: [FormComponent, NavbarComponent],
   templateUrl: './form-denuncia.component.html',
   styleUrl: './form-denuncia.component.scss',
   providers:[DatePipe]
@@ -66,7 +67,6 @@ export class FormDenunciaComponent implements OnInit {
 
   async onSubmit(formValue: any): Promise<void> {
     try {
-      console.log('o form value ', formValue)
       if (this.denunciaId) {
         await this.denunciaService.updateDenuncia(formValue, this.denunciaId);
       } else {
