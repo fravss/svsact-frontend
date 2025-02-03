@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
   imports:[ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatButton, MatInputModule, MatSelectModule,
       MatOptionModule, CommonModule, MatDatepickerModule],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css',
+  styleUrl: './form.component.scss',
     providers: [provideNativeDateAdapter()],
 
 })
@@ -34,7 +34,7 @@ export class FormComponent implements  OnChanges {
   private initForm(): void {
     const formGroupConfig = this.formConfig.reduce((config, field) => {
       config[field.name] = [field.value || '', field.validators || []];
-      console.log('field. ', field)
+
       return config;
     }, {});
    

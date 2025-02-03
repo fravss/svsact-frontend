@@ -1,24 +1,36 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div *ngFor="let field of formConfig">
-    <mat-form-field appearance="outline" class="example-full-width">
-      <mat-label>{{ field.label }}</mat-label>
-      <input
-        *ngIf="field.type === 'text' || field.type === 'date'"
-        matInput
-        [formControlName]="field.name"
-        [type]="field.type"
-      />
-      <textarea
-        *ngIf="field.type === 'textarea'"
-        matInput
-        [formControlName]="field.name"
-      ></textarea>
-      <mat-select *ngIf="field.type === 'select'" [formControlName]="field.name">
-        <mat-option *ngFor="let option of field.options" [value]="option.value">
-          {{ option.label }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <button mat-flat-button type="submit" class="submit-button">Salvar</button>
-</form>
+<div class="form-container">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngFor="let field of formConfig">
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>{{ field.label }}</mat-label>
+
+        <div *ngIf="field.type === 'text' ">
+          <input matInput [formControlName]="field.name" [type]="field.type" />
+        </div>
+
+
+        <div *ngIf="field.type === 'date'" style="display: flex; align-items: center;">
+          <input matInput id="dataEmissao" formControlName="dataEmissao" [matDatepicker]="picker" />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+
+        <div *ngIf="field.type === 'textarea'">
+          <textarea matInput [formControlName]="field.name"></textarea>
+        </div>
+
+        <div *ngIf="field.type === 'select'">
+          <mat-select [formControlName]="field.name">
+            <mat-option *ngFor="let option of field.options" [value]="option.value">
+              {{ option.label }}
+            </mat-option>
+          </mat-select>
+        </div>
+
+      </mat-form-field>
+    </div>
+    <button mat-flat-button type="submit" class="submit-button">Salvar</button>
+  </form>
+
+</div>
