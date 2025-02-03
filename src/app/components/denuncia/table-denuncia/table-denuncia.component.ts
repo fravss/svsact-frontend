@@ -33,46 +33,43 @@ export class TableDenunciaComponent implements  OnInit{
   ];
 
 
-  onTableAction(event: { action: string, row: any }) {
-    if (event.action === 'edit') {
-      console.log('Edit row:', event.row.id);
-      this.alterarDenuncia(event.row.id)
-    } else if (event.action === 'delete') {
-      console.log('Delete row:', event.row.id);
-      this.deleteDenuncia(event.row.id)
+ ngOnInit(): void {
+    this.getDenuncia();    
+  }
+
+  async getDenuncia(): Promise<void> {
+    try {
+      const data: Denuncia[] = await this.denunciaService.getDenuncia();
+      this.denunciaData = data.map(denuncia => ({
+        ...denuncia,
+        data: this.datePipe.transform(denuncia.dataEmissao, 'dd/MM/yyyy'),
+        conselheiroNome: denuncia.conselheiro.nome
+      }));
+    } catch (err) {
+      console.error('Error fetching data:', err);
     }
   }
 
-  ngOnInit(): void {
-    this.getDenuncia();    
- }
+  async deleteDenuncia(id: number): Promise<void> {
+    try {
+      await this.denunciaService.deleteDenuncia(id);
+      this.denunciaData = this.denunciaData.filter(denuncia => denuncia.id !== id);
+    } catch (err) {
+      console.error('Erro ao deletar o recurso:', err);
+    }
+  }
 
-getDenuncia(): void {
-    this.denunciaService.getDenuncia().subscribe({
-     next: (data: Denuncia[]) => {
-       this.denunciaData = data.map(denuncia => ({
-         ...denuncia,
-         data: this.datePipe.transform(denuncia.dataEmissao, 'dd/MM/yyyy'),
-         conselheiroNome: denuncia.conselheiro.nome 
-       }));
-     },
-     error: err => console.error('Error fetching data:', err),
-   });
- }
-  deleteDenuncia(id: number): void {
-    this.denunciaService.deleteDenuncia(id).subscribe({
-     next: () => {
-       this.denunciaData = this.denunciaData.filter(denuncia => denuncia.id !== id);
-       
-     },
-     error: err => {
-       console.error('Erro ao deletar o recurso:', err);
-     }
-   });
- }
+  alterarDenuncia(id: number): void {
+    this.router.navigate([`denuncia/${id}`]);
+  }
 
- alterarDenuncia(id: number): void {
-   this.router.navigate([`denuncia/${id}`]);
-}
-
+  onTableAction(event: { action: string, row: any }): void {
+    if (event.action === 'edit') {
+      console.log('Edit row:', event.row.id);
+      this.alterarDenuncia(event.row.id);
+    } else if (event.action === 'delete') {
+      console.log('Delete row:', event.row.id);
+      this.deleteDenuncia(event.row.id);
+    }
+  }
 }

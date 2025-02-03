@@ -1,97 +1,69 @@
 import { Component,  OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { DenunciaService } from '../../../services/denuncia.service';
-import { Denuncia } from '../../../interfaces/denuncia';
-import { ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatButton, MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
-import { CommonModule } from '@angular/common';
-import {ChangeDetectionStrategy} from '@angular/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {provideNativeDateAdapter} from '@angular/material/core';
 import { StatusRD } from '../../../interfaces/enums/StatusRD';
-import { LogoutButtonComponent } from '../../autenticacao/logout-button/logout-button.component';
-import { first } from 'rxjs';
-
+import { FormComponent } from '../../shared/form/form.component';
 
 @Component({
   selector: 'app-form-denuncia',
-  imports:  [ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatButton, MatInputModule, MatSelectModule,
-    MatOptionModule, CommonModule, MatDatepickerModule, LogoutButtonComponent],
+  imports:  [FormComponent],
   templateUrl: './form-denuncia.component.html',
   styleUrl: './form-denuncia.component.scss',
-  providers: [provideNativeDateAdapter()],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormDenunciaComponent implements OnInit{
-  denunciaForm: FormGroup;
-  origemDenunciasEnum: string[] = [];
-  statusRD: string[] = Object.values(StatusRD);
+export class FormDenunciaComponent  implements OnInit {
+  formConfig: any[] = [];
   denunciaId?: number;
- 
+  editValues? = {};
 
-  constructor(private fb: FormBuilder, private denunciaService: DenunciaService, private router: Router, private route: ActivatedRoute) {
-    this.denunciaForm = this.fb.group({
-      relato: ['', Validators.required],
-      dataEmissao:  ['', Validators.required],
-      statusRD: ['', Validators.required],
-      origemDenuncia: ['', Validators.required],
-      responsaveis: ['', Validators.required],
-      criancasAdolescentes: ['', Validators.required],
-      medidasAplicadas: ['', Validators.required],
-    });
-  }
-  ngOnInit(): void {
-    this.denunciaService.getOrigemDenuncias().subscribe(data => {
-      this.origemDenunciasEnum = data;
-    });  
+  constructor(
+    private denunciaService: DenunciaService,
+    private router: Router,
+    private route: ActivatedRoute,
+   
+  ) {}
 
-    this.denunciaId =  Number(this.router.url.split('/')[2]);
-    if(this.denunciaId) {
-      this.denunciaService.getDenunciaById(this.denunciaId).subscribe(response => {
-        console.log('Denuncia encontrada:', response);
-        this.denunciaForm.patchValue({
-          relato: response.relato,
-          dataEmissao: response.dataEmissao,
-          statusRD: response.statusRD,
-          origemDenuncia: response.origemDenuncia,
-          responsaveis: response.responsaveis,
-          criancasAdolescentes: response.criancasAdolescentes,
-          medidasAplicadas: response.medidasAplicadas
-        });
-        
-      });
-      
-    } else {
-      console.log('nao tem id')
-    }
-  }
-
-
- onSubmit(): void {
-
-    if (this.denunciaForm.valid && this.denunciaId) {
-      const novaDenuncia: Denuncia = this.denunciaForm.value;
-       this.denunciaService.updateDenuncia(novaDenuncia, this.denunciaId).subscribe(response => {
-        console.log('Denúncia atualizada com sucesso:', response);
-        this.router.navigate(['/denuncias']);
-        
-      });
-      
-    } else if (this.denunciaForm.valid){
-      const novaDenuncia: Denuncia = this.denunciaForm.value;
-       this.denunciaService.addDenuncia(novaDenuncia).subscribe(response => {
-        console.log('Denúncia criada com sucesso:', response);
-        this.router.navigate(['/denuncias']);
-        
-      });
-    }
-  }
-
+ async ngOnInit(): Promise<void> {   
+  this.formConfig = [
+    { name: 'responsaveis', label: 'Responsáveis', type: 'text', validators: [Validators.required] },
+    { name: 'criancasAdolescentes', label: 'Crianças ou Adolescentes Envolvidos', type: 'text', validators: [Validators.required] },
+    { name: 'relato', label: 'Relato', type: 'textarea', validators: [Validators.required] },
+    { name: 'medidasAplicadas', label: 'Medidas Aplicadas', type: 'text', validators: [Validators.required] },
+    { name: 'dataEmissao', label: 'Data de Emissão', type: 'date', validators: [Validators.required] },
+    { name: 'origemDenuncia', label: 'Origem Denúncia', type: 'select', options: [], validators: [Validators.required] },
+    { name: 'statusRD', label: 'Status', type: 'select', options: Object.values(StatusRD).map(status => ({ value: status, label: status })), validators: [Validators.required] }
+  ];
+    try {
   
+      this.denunciaId = Number(this.route.snapshot.paramMap.get('id'));
+      if (this.denunciaId) {
+        const denunciaData = await this.denunciaService.getDenunciaById(this.denunciaId);
+        this.formConfig = this.formConfig.map(field => ({
+          ...field,
+          value: denunciaData[field.name] || field.value
+        }));
+       }
+      const origemDenunciaData = await this.denunciaService.getOrigemDenuncias();
+      const origemDenunciaField = this.formConfig.find(field => field.name === 'origemDenuncia');
+      if (origemDenunciaField) {
+        origemDenunciaField.options = origemDenunciaData.map(origem => ({ value: origem, label: origem }));
+      }
+     
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
+    }
+  }
 
+  async onSubmit(formValue: any): Promise<void> {
+    try {
+      if (this.denunciaId) {
+        await this.denunciaService.updateDenuncia(formValue, this.denunciaId);
+      } else {
+        await this.denunciaService.addDenuncia(formValue);
+      }
+      this.router.navigate(['/denuncias']);
+    } catch (error) {
+      console.error('Erro ao enviar dados:', error);
+    }
+  }
 }
