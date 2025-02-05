@@ -30,8 +30,8 @@ export class FormLoginComponent implements OnInit{
         await this.autenticacaoService.login(formValue);
         this.router.navigate(['/denuncias']);
     
-    } catch (error) {
-      console.error('Erro ao enviar dados:', error);
+    } catch (error: any) {
+      console.error('Erro ao enviar dados:', error.error.message);
     }
   }
 

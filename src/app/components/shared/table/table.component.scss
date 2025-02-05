@@ -22,7 +22,7 @@
       gap: 20px;
 
       .table-name {
-        color:cores.$grey;
+        color:rgb(46, 46, 46);
         font-size: 30px;
         font-weight:400;
         position: absolute;
@@ -41,7 +41,7 @@
       overflow: hidden;
       th {
           padding: 12px;
-          background-color: cores.$dark-color;    
+          background-color: cores.$dark-color2;    
           text-align: center;        
       }   
       td {
