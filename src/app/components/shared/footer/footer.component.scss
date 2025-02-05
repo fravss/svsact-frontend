@@ -1,9 +1,9 @@
 @use '../../../../assets/styles/colors.scss' as cores;
 .footer {
-  background-color: cores.$dark-color; 
-  color: cores.$light-color;
+  background-color: cores.$light-color; 
+  color: cores.$dark-color;
   text-align: center;
   padding: 1px 0;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.503),  
-  0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 10px 20px rgb(0, 0, 0),  
+  0px 4px 6px rgb(0, 0, 0);
 }

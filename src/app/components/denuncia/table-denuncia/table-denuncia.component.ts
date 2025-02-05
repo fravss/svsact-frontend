@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TableComponent } from '../../shared/table/table.component';
 import { DatePipe } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { ToastService } from '../../shared/toast/toast.service';
 
 
 
@@ -17,7 +18,12 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 })
 export class TableDenunciaComponent implements  OnInit{
   
-  constructor(private denunciaService: DenunciaService, private router: Router, private datePipe: DatePipe) { }
+  constructor(
+    private denunciaService: DenunciaService, 
+    private router: Router, 
+    private datePipe: DatePipe,
+    private toastService: ToastService) { }
+
   denunciaData: Denuncia[] = []; 
 
   tableColumns = [
@@ -45,8 +51,8 @@ export class TableDenunciaComponent implements  OnInit{
         data: this.datePipe.transform(denuncia.dataEmissao, 'dd/MM/yyyy'),
         conselheiroNome: denuncia.conselheiro.nome
       }));
-    } catch (err) {
-      console.error('Error fetching data:', err);
+    } catch (ex: any) {
+      this.toastService.callErrorToast(ex.error.message)
     }
   }
 
@@ -54,8 +60,9 @@ export class TableDenunciaComponent implements  OnInit{
     try {
       await this.denunciaService.deleteDenuncia(id);
       this.denunciaData = this.denunciaData.filter(denuncia => denuncia.id !== id);
-    } catch (err) {
-      console.error('Erro ao deletar o recurso:', err);
+      this.toastService.callSuccessToast('Denuncia deletada com sucesso!')
+    } catch (ex: any) {
+      this.toastService.callErrorToast(ex.error.message)
     }
   }
 

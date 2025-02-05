@@ -6,6 +6,7 @@ import { StatusRD } from '../../../interfaces/enums/StatusRD';
 import { FormComponent } from '../../shared/form/form.component';
 import { DatePipe } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { ToastService } from '../../shared/toast/toast.service';
 
 @Component({
   selector: 'app-form-denuncia',
@@ -24,6 +25,7 @@ export class FormDenunciaComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private datePipe: DatePipe,
+    private toastService: ToastService
 
   ) { }
 
@@ -44,8 +46,8 @@ export class FormDenunciaComponent implements OnInit {
       if (this.denunciaId) {
         await this.onEdit(this.denunciaId);
       }
-    } catch (error) {
-      console.error('Erro ao carregar dados:', error);
+    } catch (ex: any) {
+      this.toastService.callErrorToast(ex.error.message)
     }
   }
 
@@ -73,8 +75,8 @@ export class FormDenunciaComponent implements OnInit {
         await this.denunciaService.addDenuncia(formValue);
       }
       this.router.navigate(['/denuncias']);
-    } catch (error) {
-      console.error('Erro ao enviar dados:', error);
+    } catch (ex: any) {
+      this.toastService.callErrorToast(ex.error.message)
     }
   }
 }
