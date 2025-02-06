@@ -4,19 +4,23 @@ import { AutenticacaoService } from '../../../services/autenticacao.service';
 import { FormComponent } from '../../shared/form/form.component';
 import { Usuario } from '../../../interfaces/usuario';
 import { Router } from '@angular/router';
+import { ToastService } from '../../shared/toast/toast.service';
+
 
 @Component({
   selector: 'app-form-login',
   imports: [FormComponent],
   templateUrl: './form-login.component.html',
-  styleUrl: './form-login.component.css'
+  styleUrl: './form-login.component.css',
 })
 export class FormLoginComponent implements OnInit{
   formConfig: any[] = [];
 
   constructor(
     private autenticacaoService: AutenticacaoService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
+
   ){}
 
   ngOnInit(): void {
@@ -26,12 +30,17 @@ export class FormLoginComponent implements OnInit{
         ];
   }
   async onSubmit(formValue: Usuario): Promise<void> {
+  
     try {
+      
+     
         await this.autenticacaoService.login(formValue);
         this.router.navigate(['/denuncias']);
+        
     
-    } catch (error: any) {
-      console.error('Erro ao enviar dados:', error.error.message);
+    } catch (ex: any) {
+      this.toastService.callErrorToast(ex.error.message)
+      console.error('Erro ao enviar dados:', ex);
     }
   }
 
