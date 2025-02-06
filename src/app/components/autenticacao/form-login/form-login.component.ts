@@ -39,8 +39,8 @@ export class FormLoginComponent implements OnInit{
         
     
     } catch (ex: any) {
-      this.toastService.callSuccessToast(ex.error.message)
-      console.error('Erro ao enviar dados:', ex.error.message);
+      this.toastService.callErrorToast(ex.error.message)
+      console.error('Erro ao enviar dados:', ex);
     }
   }
 

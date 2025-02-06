@@ -72,10 +72,8 @@ export class TableDenunciaComponent implements  OnInit{
 
   onTableAction(event: { action: string, row: any }): void {
     if (event.action === 'edit') {
-      console.log('Edit row:', event.row.id);
       this.alterarDenuncia(event.row.id);
     } else if (event.action === 'delete') {
-      console.log('Delete row:', event.row.id);
       this.deleteDenuncia(event.row.id);
     }
   }

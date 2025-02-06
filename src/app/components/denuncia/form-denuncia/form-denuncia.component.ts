@@ -71,8 +71,10 @@ export class FormDenunciaComponent implements OnInit {
     try {
       if (this.denunciaId) {
         await this.denunciaService.updateDenuncia(formValue, this.denunciaId);
+        this.toastService.callSuccessToast('Denuncia modificada com sucesso!')
       } else {
         await this.denunciaService.addDenuncia(formValue);
+        this.toastService.callSuccessToast('Denuncia criada com sucesso!')
       }
       this.router.navigate(['/denuncias']);
     } catch (ex: any) {
