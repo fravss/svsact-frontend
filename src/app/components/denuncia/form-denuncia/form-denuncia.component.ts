@@ -31,10 +31,10 @@ export class FormDenunciaComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.formConfig = [
-      { name: 'responsaveis', label: 'Responsáveis', type: 'text', validators: [Validators.required] },
-      { name: 'criancasAdolescentes', label: 'Crianças ou Adolescentes Envolvidos', type: 'text', validators: [Validators.required] },
+      { name: 'responsaveis', label: 'Responsáveis', type: 'text'},
+      { name: 'criancasAdolescentes', label: 'Crianças ou Adolescentes Envolvidos', type: 'text'},
       { name: 'relato', label: 'Relato', type: 'textarea', validators: [Validators.required] },
-      { name: 'medidasAplicadas', label: 'Medidas Aplicadas', type: 'text', validators: [Validators.required] },
+      { name: 'medidasAplicadas', label: 'Medidas Aplicadas', type: 'text'},
       { name: 'dataEmissao', label: 'Data de Emissão', type: 'date', validators: [Validators.required] },
       { name: 'origemDenuncia', label: 'Origem Denúncia', type: 'select', options: [], validators: [Validators.required] },
       { name: 'statusRD', label: 'Status', type: 'select', options: Object.values(StatusRD).map(status => ({ value: status, label: status })), validators: [Validators.required] }

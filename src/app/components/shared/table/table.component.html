@@ -34,9 +34,12 @@
         }"
         [class]="action.class || 'btn-default'"
         (click)="onActionClick(action.action, row)"
+        [matTooltip]="action.label" 
+         matTooltipPosition="above" 
       >
-        {{ action.label }}
+      <mat-icon>{{ action.icon }}</mat-icon>
       </button>
+      
     </td>
   </ng-container>
 

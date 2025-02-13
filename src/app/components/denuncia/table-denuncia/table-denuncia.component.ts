@@ -34,8 +34,8 @@ export class TableDenunciaComponent implements  OnInit{
   ];
 
   tableActions = [
-    { label: 'Editar', action: 'edit', class: 'btn-edit' },
-    { label: 'Deletar', action: 'delete', class: 'btn-delete' }
+    { label: 'Editar', action: 'edit', class: 'btn-edit', icon: "edit"},
+    { label: 'Deletar', action: 'delete', class: 'btn-delete', icon:"delete" }
   ];
 
 
