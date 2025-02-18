@@ -11,5 +11,6 @@ export const routes: Routes = [
     { path: 'denuncias', component: TableDenunciaComponent, canActivate: [autenticacaoGuard] },
     { path: 'denuncia', component: FormDenunciaComponent, canActivate: [autenticacaoGuard] },
     { path: 'denuncia/:id', component: FormDenunciaComponent, canActivate: [autenticacaoGuard] },
+    { path: '', redirectTo: 'login', pathMatch: 'full' }
    
 ];
