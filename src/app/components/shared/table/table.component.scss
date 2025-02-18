@@ -59,7 +59,7 @@
       .even-row {
         background-color: white;
 
-     
+       
       }
       .action-button-odd {
         background-color: cores.$light-dark-color;
@@ -84,10 +84,14 @@
         }
       }
   }    
-     
 
     button {
         margin-right: 8px;
+        mat-icon {
+          margin: 0;
+          padding: 0; 
+        }
+      
     }
 
    

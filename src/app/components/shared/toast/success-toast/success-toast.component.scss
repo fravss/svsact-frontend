@@ -1,0 +1,28 @@
+.toast-container {
+    display: flex;
+    color: #ffffff;
+    border-left: 8px solid #00ce1b;
+  
+    .close-icon {
+      
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+  
+      &:hover {
+        color: #ddd;
+      }
+    }
+    .message {
+      display: flex;
+      flex-direction: column; 
+  
+      small {
+        font-size: 14px;
+        opacity: 0.8;
+      }
+    }
+  }
+  
