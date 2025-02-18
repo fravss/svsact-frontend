@@ -15,28 +15,30 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrl: './table.component.scss'
 })
 export class TableComponent implements OnInit, AfterViewInit {
-  @Input() data: any[] = [];
-  @Input() columns: { key: string, header: string }[] = [];
-  @Input() actions: { label: string, action: string, class?: string, icon?: string }[] = [];
-  @Output() actionClick = new EventEmitter<{ action: string, row: any }>();
-  @Input() nome: string = 'Nome da Tabela';
+  @Input() informacoes: any[] = [];
+  @Input() colunas: { key: string, nome: string }[] = [];
+  @Input() acoes: { label: string, acao: string,  icon?: string }[] = [];
+  @Output() acaoClick = new EventEmitter<{ acao: string, linha: any }>();
+
+  @Input() nomeDaTabela: string = '';
+  
 
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = [];
 
   ngOnInit() {
-    this.displayedColumns = [...this.columns.map(c => c.key)];
-    if (this.actions.length > 0) {
-      this.displayedColumns.push('actions');
+    this.displayedColumns = [...this.colunas.map(c => c.key)];
+    if (this.acoes.length > 0) {
+      this.displayedColumns.push('acoes');
     }
 
-    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource = new MatTableDataSource(this.informacoes);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['data'] && changes['data'].currentValue) {
-      this.dataSource = new MatTableDataSource(this.data);
+    if (changes['informacoes'] && changes['informacoes'].currentValue) {
+      this.dataSource = new MatTableDataSource(this.informacoes);
       if (this.paginator) {
         this.dataSource.paginator = this.paginator;
       }
@@ -49,8 +51,8 @@ export class TableComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onActionClick(action: string, row: any) {
-    this.actionClick.emit({ action, row });
+  onClick(acao: string, linha: any) {
+    this.acaoClick.emit({ acao, linha });
   }
 
     applyFilter(event: Event): void {

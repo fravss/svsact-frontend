@@ -1,3 +1,3 @@
 <app-navbar></app-navbar>
-<app-table [data]=" denunciaData" [columns]="tableColumns" [actions]="tableActions" [nome]="'DENUNCIAS'"
-(actionClick)="onTableAction($event)"></app-table>
+<app-table [informacoes]="denuncias" [colunas]="colunas" [acoes]="acoes" [nomeDaTabela]="'DENUNCIAS'"
+(acaoClick)="onDenunciaEvent($event)"></app-table>

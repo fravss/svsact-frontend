@@ -9,13 +9,13 @@ import { Denuncia } from '../interfaces/denuncia';
 })
 export class DenunciaService {
 
-  private baseUrl =  environment.apiUrl + '/denuncia';
+  private baseUrl =  environment.apiUrl + '/restricted/denuncia';
 
   constructor(private http: HttpClient) { }
 
-  async getDenuncia(): Promise<any> {
-    console.log("no get den");
-    return await firstValueFrom(this.http.get<any>(this.baseUrl));
+  async getDenuncias(): Promise<Denuncia[]> {
+
+    return await firstValueFrom(this.http.get<Denuncia[]>(this.baseUrl));
   }
 
   async getDenunciaById(id: number): Promise<any> {

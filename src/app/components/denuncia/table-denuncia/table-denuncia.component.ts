@@ -24,18 +24,18 @@ export class TableDenunciaComponent implements  OnInit{
     private datePipe: DatePipe,
     private toastService: ToastService) { }
 
-  denunciaData: Denuncia[] = []; 
+  denuncias: Denuncia[] = []; 
 
-  tableColumns = [
-    { key: 'relato', header: 'Relato' },
-    { key: 'conselheiroNome', header: 'Criador' },
-    { key: 'statusRD', header: 'Status' },
-    { key: 'data', header: 'Data' }
+  colunas = [
+    { key: 'relato', nome: 'Relato' },
+    { key: 'conselheiroNome', nome: 'Criador' },
+    { key: 'statusRD', nome: 'Status' },
+    { key: 'data', nome: 'Data' }
   ];
 
-  tableActions = [
-    { label: 'Editar', action: 'edit', class: 'btn-edit', icon: "edit"},
-    { label: 'Deletar', action: 'delete', class: 'btn-delete', icon:"delete" }
+  acoes = [
+    { label: 'Editar', acao: 'editar', icon: "edit"},
+    { label: 'Deletar', acao: 'deletar', icon:"delete" }
   ];
 
 
@@ -45,12 +45,14 @@ export class TableDenunciaComponent implements  OnInit{
 
   async getDenuncia(): Promise<void> {
     try {
-      const data: Denuncia[] = await this.denunciaService.getDenuncia();
-      this.denunciaData = data.map(denuncia => ({
+      const data: Denuncia[] = await this.denunciaService.getDenuncias();
+
+      this.denuncias = data.map(denuncia => ({
         ...denuncia,
         data: this.datePipe.transform(denuncia.dataEmissao, 'dd/MM/yyyy'),
         conselheiroNome: denuncia.conselheiro.nome
       }));
+
     } catch (ex: any) {
       this.toastService.callErrorToast(ex.error.message)
     }
@@ -59,7 +61,7 @@ export class TableDenunciaComponent implements  OnInit{
   async deleteDenuncia(id: number): Promise<void> {
     try {
       await this.denunciaService.deleteDenuncia(id);
-      this.denunciaData = this.denunciaData.filter(denuncia => denuncia.id !== id);
+      this.denuncias = this.denuncias.filter(denuncia => denuncia.id !== id);
       this.toastService.callSuccessToast('Denuncia deletada com sucesso!')
     } catch (ex: any) {
       this.toastService.callErrorToast(ex.error.message)
@@ -70,11 +72,11 @@ export class TableDenunciaComponent implements  OnInit{
     this.router.navigate([`denuncia/${id}`]);
   }
 
-  onTableAction(event: { action: string, row: any }): void {
-    if (event.action === 'edit') {
-      this.alterarDenuncia(event.row.id);
-    } else if (event.action === 'delete') {
-      this.deleteDenuncia(event.row.id);
+  onDenunciaEvent(event: { acao: string, linha: any }): void {
+    if (event.acao === 'editar') {
+      this.alterarDenuncia(event.linha.id);
+    } else if (event.acao === 'deletar') {
+      this.deleteDenuncia(event.linha.id);
     }
   }
 }
